@@ -1,13 +1,20 @@
+<div class="row">
+  <label for="food_name"> Search: </label>
+  <input id="food_name" type="text" placeholder="food name" name="" value="" [(ngModel)]="pattern">
+</div>
+
+
 <h1>List of food</h1>
 <ul>
   <div class="col-md-12">
-    <li id="{{ food.name }}" class="row food" *ngFor="let food of foods">
+    <li id="{{ food.name }}" class="row food" *ngFor="let food of foods | filter:'name':pattern; let i = index">
       <img  class="col-md-4" src="{{ food.image }}" alt="">
       <div class="col-md-8">
         <h4>{{ food.name }}</h4>
         <p>{{ food.calories }}</p>
       </div>
-
+      <!-- <input type="number" value="1" min="1" #quantity required placeholder="Number of {{ food.name }}">
+      <button (click)=""></button> -->
     </li>
 
   </div>
