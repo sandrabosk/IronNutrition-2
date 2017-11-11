@@ -1,0 +1,14 @@
+<h1>List of food</h1>
+<ul>
+  <div class="col-md-12">
+    <li id="{{ food.name }}" class="row food" *ngFor="let food of foods">
+      <img  class="col-md-4" src="{{ food.image }}" alt="">
+      <div class="col-md-8">
+        <h4>{{ food.name }}</h4>
+        <p>{{ food.calories }}</p>
+      </div>
+
+    </li>
+
+  </div>
+</ul>

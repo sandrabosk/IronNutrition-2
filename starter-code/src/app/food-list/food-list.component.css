@@ -1,0 +1,11 @@
+img {
+  width: 200px;
+}
+
+li {
+  list-style-type: none;
+}
+
+.food {
+  margin: 50px 0;
+}
