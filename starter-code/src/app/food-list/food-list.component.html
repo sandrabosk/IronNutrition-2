@@ -1,21 +1,48 @@
-<div class="row">
-  <label for="food_name"> Search: </label>
-  <input id="food_name" type="text" placeholder="food name" name="" value="" [(ngModel)]="pattern">
-</div>
+<div class="container blah">
+  <div class="row">
+    <div class="col-md-8">
+      <!-- new food component -->
+      <app-new-food (onAddFood)="addFood($event)"></app-new-food>
+    </div>
+    <div class="col-md-4 input-group stylish-input-group">
+      <!-- <label class="col-md-4" for="food_name"> Search: </label> -->
+      <input class="col-md-8 form-control" id="food_name" type="text" placeholder="food name" name="" value="" [(ngModel)]="pattern">
+      <span class="input-group-addon">
+          <button type="submit">
+              <span class="glyphicon glyphicon-search"></span>
+          </button>
+      </span>
+    </div>
 
-
-<h1>List of food</h1>
-<ul>
-  <div class="col-md-12">
-    <li id="{{ food.name }}" class="row food" *ngFor="let food of foods | filter:'name':pattern; let i = index">
-      <img  class="col-md-4" src="{{ food.image }}" alt="">
-      <div class="col-md-8">
-        <h4>{{ food.name }}</h4>
-        <p>{{ food.calories }}</p>
-      </div>
-      <!-- <input type="number" value="1" min="1" #quantity required placeholder="Number of {{ food.name }}">
-      <button (click)=""></button> -->
-    </li>
 
   </div>
-</ul>
+  <hr>
+  <div class="row">
+    <div class="col-md-7">
+      <h2> {{ title }} </h2>
+      <ul>
+        <li class="row food" *ngFor="let food of foods | filter:'name':pattern; let i = index">
+          <div  class="col-md-4">
+            <img [src]="food.image" alt="">
+
+          </div>
+          <div class="col-md-8">
+            <h4>{{ food.name }} - <small>{{ food.calories }} cal</small></h4>
+          </div>
+          <input type="text" #quantity value="1">
+          <button (click)="addToMyList(food, quantity)">ADD</button>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-5">
+      <h2>My daily food list <small>{{ totalCal }} cal </small></h2>
+        <ul>
+          <li *ngFor="let myFood of myList">
+            <span>{{ myFood.name }}</span>
+            <span>{{ myFood.calories }}</span>
+            <span *ngIf="myFood.quantity > 1">x {{ myFood.quantity }}</span>
+          </li>
+        </ul>
+    </div>
+  </div>
+</div>

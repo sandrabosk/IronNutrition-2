@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 import foods from '../foods';
 
 @Component({
@@ -8,6 +8,9 @@ import foods from '../foods';
   encapsulation: ViewEncapsulation.None
 })
 export class NewFoodComponent implements OnInit {
+  @Output () onAddFood = new EventEmitter();
+
+
   foods: Object[];
   newFood: Object = {};
   show: boolean = true;
@@ -18,12 +21,13 @@ export class NewFoodComponent implements OnInit {
 
   submitForm(addFood){
     this.newFood ={
-      name:addFood.newFoodName.value,
+      name: addFood.newFoodName.value,
       calories: addFood.newFoodCalories.value,
       image: addFood.newFoodImage.value,
       quantity: 0
     }
-    this.foods.push(this.newFood);
+    this.onAddFood.emit(this.newFood);
+    // this.foods.push(this.newFood);
     this.show = true;
     addFood.reset();
   }
